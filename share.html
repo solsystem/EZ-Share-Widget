@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Share Widget for Jquery 1.9.1 by Joseph Milnes</title>
+<!--EZ Share Widget Required Files & Scripts-->
+<link rel="stylesheet" type="text/css" href="css/share.css" />
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/cookie.js"></script>
+<script language="javascript" type="text/javascript">
+function OpenPopupCenter(pageURL, title, w, h) {
+var left = (screen.width - w) / 2;
+var top = (screen.height - h) / 4;  // for 25% - devide by 4  |  for 33% - devide by 3
+var targetWin = window.open(pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+} 
+</script>
+<!--EZ Share Widget Required Files & Scripts-->
+</head>
+
+<body>
+<!--EZ Share Widget-->
+<div id="share">
+<ul>
+<li><a href="javaScript:void(0);" title="Share via Facebook" class="fb" id="fb" onclick="OpenPopupCenter('http://www.facebook.com/sharer/sharer.php?u=http://www.beyondmarsedibles.com', 'TEST!?', 500, 270);"></a></li>
+<li><a href="javaScript:void(0);" title="Share via Twitter" class="tw" id="tw" onclick="OpenPopupCenter('https://twitter.com/share?hashtags=MMJ,Edibles,BeyondMars&text=Check out Beyond Mars&trade; Edibles! They are simply delicious! &via=thebeyondmars&url=http%3A%2F%2Fwww.beyondmarsedibles.com', 'TEST!?', 500, 490);"></a></li>
+<li><a href="javaScript:void(0);" title="Share via Email" class="em" id="em" onclick="OpenPopupCenter('mailto:?subject=Check out Beyond Mars MMJ Edibles!&amp;body=They have amazingly delicious new products at unbeatable prices! Check out their website at http://www.BeyondMarsEdibles.com', 'TEST!?', 500, 490);"></a></li>
+<li><a href="javaScript:void(0);" class="collapse"></a></li>
+</ul>
+</div>
+
+<div id="expand_share" style="display: none"><a href="javaScript:void(0);" class="expand"></a></div>
+
+<script>
+$(document).ready(function(){
+// Check (onLoad) if the cookie is there and set the class if it is
+if ($.cookie('hidden') == "yes") {
+	$( "#share" ).hide("slide", { direction: "right" }, 5);
+	$( "#expand_share" ).show("slide", { direction: "right" }, 10);;
+}
+
+// When the COLLAPSE is clicked
+$(".collapse").click(function () {
+// Check the current cookie value
+// If the cookie is empty or set to no, then add highcontrast
+if ($.cookie('hidden') == "undefined" || $.cookie('hidden') == "no") {
+	// Set cookie value to yes
+	$.cookie('hidden','yes', {expires: 2, path: '/'});
+	// Add the class to the body
+	$( "#share" ).hide("slide", { direction: "right" }, 50);
+	$( "#expand_share" ).show("slide", { direction: "right" }, 100);
+}
+// If the cookie was already set to yes then remove it
+else {
+	$.cookie('hidden','no',  {expires: 2, path: '/'});
+	$( "#expand_share" ).hide("slide", { direction: "right" }, 50);
+	$( "#share" ).show("slide", { direction: "right" }, 100);
+}
+}); 
+
+// When the EXPAND is clicked
+$(".expand").click(function () {
+// Check the current cookie value
+// If the cookie is empty or set to no, then add highcontrast
+if ($.cookie('hidden') == "yes") {
+	// Set cookie value to no
+	$.cookie('hidden','no', {expires: 2, path: '/'});
+	// Add the class to the body
+	$( "#expand_share" ).hide("slide", { direction: "right" }, 50);
+	$( "#share" ).show("slide", { direction: "right" }, 100);
+}
+// If the cookie was already set to yes then remove it
+else {
+	$.cookie('hidden','no',  {expires: 2, path: '/'});
+	$( "#share" ).hide("slide", { direction: "right" }, 50);
+	$( "#expand_share" ).show("slide", { direction: "right" }, 100);
+}
+}); 
+});
+// MouseHover Event Animations
+$( "#share" ).mouseenter(function() {
+  $( "#fb" ).animate({ opacity: 0.4 }, 0 );
+  $( "#tw" ).animate({ opacity: 0.4 }, 0 );
+  $( "#em" ).animate({ opacity: 0.4 }, 0 );
+});
+
+$( "#share" ).mouseleave(function() {
+  $( "#fb" ).animate({ opacity: 1.0 }, 400 );
+  $( "#tw" ).animate({ opacity: 1.0 }, 400 );
+  $( "#em" ).animate({ opacity: 1.0 }, 400 );
+});
+
+$( "#share ul li a" ).mouseenter(function() {
+  $(this).css({opacity : 1.0})
+  .mouseout(function() {
+    $(this).css({opacity : 0.4})
+  });
+});
+</script>
+<!--EZ Share Widget-->
+</body>
+</html>
